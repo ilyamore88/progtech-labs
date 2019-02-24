@@ -16,12 +16,11 @@ namespace Homework
         public DateTime Birthdate { get; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int WorkExperience { get; set; }
         public Permissions CurrentPermissions { get; set; }
 
         protected Person() { }
 
-        public Person(int id, string lastname, string firstname, DateTime birthdate, string username, string password, int workExperience, Permissions currentPermissions)
+        public Person(int id, string lastname, string firstname, DateTime birthdate, string username, string password, Permissions currentPermissions)
         {
             Id = id;
             Lastname = lastname;
@@ -29,7 +28,6 @@ namespace Homework
             Birthdate = birthdate;
             Username = username;
             Password = password;
-            WorkExperience = workExperience;
             CurrentPermissions = currentPermissions;
         }
 
@@ -39,33 +37,6 @@ namespace Homework
             int age = today.Year - this.Birthdate.Year;
             if (this.Birthdate > today.AddYears(-age)) age--;
             return age;
-        }
-
-        public bool AddWorkExperience(int workYears)
-        {
-            if (workYears > 0)
-            {
-                this.WorkExperience += workYears;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
-        public bool RemoveWorkExperience(int workYears)
-        {
-            if (workYears <= this.WorkExperience && workYears > 0)
-            {
-                this.WorkExperience -= workYears;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public void Print()

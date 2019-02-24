@@ -10,7 +10,7 @@ namespace Homework
     {
         public string Laboratory { get; }
 
-        public Admin(int id, string lastname, string firstname, DateTime birthdate, string username, string password, string laboratory) : base(id, lastname, firstname, birthdate, username, password, 0, Permissions.admin)
+        public Admin(int id, string lastname, string firstname, DateTime birthdate, string username, string password, string laboratory) : base(id, lastname, firstname, birthdate, username, password, Permissions.admin)
         {
             this.Laboratory = laboratory;
         }

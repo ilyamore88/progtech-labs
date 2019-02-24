@@ -37,14 +37,76 @@ namespace Homework
                 DateTime birthdate = DateTime.ParseExact(birthdateS, "dd.MM.yyyy", null);
                 string username = id.ToString();
                 string password = "firstpassword";
-                Console.Write("Введите время учёбы студента: ");
-                int workExperience = int.Parse(Console.ReadLine());
                 Console.Write("Введите факультет студента: ");
                 string faculty = Console.ReadLine();
                 Console.Write("Введите учебную группу студента: ");
                 string group = Console.ReadLine();
-                laboratory.AddStudent(new Student(id, lastname, firstname, birthdate, username, password, workExperience, faculty, group));
+                laboratory.AddStudent(new Student(id, lastname, firstname, birthdate, username, password, faculty, group));
                 Console.WriteLine("Студент успешно добавлен!");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("У Вас недостаточно прав!");
+                Console.ReadKey();
+            }
+        }
+
+        static void AddTeacher(ref Laboratory laboratory)
+        {
+            Console.Clear();
+            if (CurrentUser != null && (CurrentUser.CurrentPermissions == Person.Permissions.admin || CurrentUser.CurrentPermissions == Person.Permissions.manager))
+            {
+                Console.Write("Введите ID преподавателя: ");
+                int id = int.Parse(Console.ReadLine());
+                Console.Write("Введите фамилию преподавателя: ");
+                string lastname = Console.ReadLine();
+                Console.Write("Введите имя преподавателя: ");
+                string firstname = Console.ReadLine();
+                Console.Write("Введите дату рождения преподавателя (dd.MM.yyyy): ");
+                string birthdateS = Console.ReadLine();
+                DateTime birthdate = DateTime.ParseExact(birthdateS, "dd.MM.yyyy", null);
+                string username = id.ToString();
+                string password = "firstpassword";
+                Console.Write("Введите стаж работы: ");
+                int workExperience = int.Parse(Console.ReadLine());
+                Console.Write("Введите факультет преподавателя: ");
+                string faculty = Console.ReadLine();
+                Console.Write("Введите должность преподавателя: ");
+                string post = Console.ReadLine();
+                laboratory.AddTeacher(new Teacher(id, lastname, firstname, birthdate, username, password, workExperience, faculty, post));
+                Console.WriteLine("Преподаватель успешно добавлен!");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("У Вас недостаточно прав!");
+                Console.ReadKey();
+            }
+        }
+
+        static void AddManager(ref Laboratory laboratory)
+        {
+            Console.Clear();
+            if (CurrentUser != null && (CurrentUser.CurrentPermissions == Person.Permissions.admin || CurrentUser.CurrentPermissions == Person.Permissions.manager))
+            {
+                Console.Write("Введите ID менеджера: ");
+                int id = int.Parse(Console.ReadLine());
+                Console.Write("Введите фамилию менеджера: ");
+                string lastname = Console.ReadLine();
+                Console.Write("Введите имя менеджера: ");
+                string firstname = Console.ReadLine();
+                Console.Write("Введите дату рождения менеджера (dd.MM.yyyy): ");
+                string birthdateS = Console.ReadLine();
+                DateTime birthdate = DateTime.ParseExact(birthdateS, "dd.MM.yyyy", null);
+                string username = id.ToString();
+                string password = "firstpassword";
+                Console.Write("Введите факультет менеджера: ");
+                string faculty = Console.ReadLine();
+                Console.Write("Введите должность менеджера: ");
+                string post = Console.ReadLine();
+                laboratory.AddManager(new Manager(id, lastname, firstname, birthdate, username, password, faculty, post));
+                Console.WriteLine("Менеджер успешно добавлен!");
                 Console.ReadKey();
             }
             else
@@ -212,7 +274,7 @@ namespace Homework
                             {
                                 case 4:
                                     isCorrect = true;
-                                    //Добавить учителя
+                                    AddTeacher(ref laboratory);
                                     break;
                                 case 5:
                                     isCorrect = true;
@@ -233,7 +295,7 @@ namespace Homework
                                         {
                                             case 8:
                                                 isCorrect = true;
-                                                //Добавить менеджера
+                                                AddManager(ref laboratory);
                                                 break;
                                             case 9:
                                                 isCorrect = true;

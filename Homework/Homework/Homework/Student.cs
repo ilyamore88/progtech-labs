@@ -12,7 +12,7 @@ namespace Homework
         public string Faculty { get; set; }
         public string Group { get; set; }
 
-        public Student(int id, string lastname, string firstname, DateTime birthdate, string username, string password, int workExperience, string faculty, string group) : base(id, lastname, firstname, birthdate, username, password, workExperience, Permissions.student)
+        public Student(int id, string lastname, string firstname, DateTime birthdate, string username, string password, string faculty, string group) : base(id, lastname, firstname, birthdate, username, password, Permissions.student)
         {
             Faculty = faculty;
             Group = group;
