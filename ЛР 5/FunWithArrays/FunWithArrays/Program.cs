@@ -41,7 +41,7 @@ namespace FunWithArrays
 
         private static double GetAverage(int[] a)
         {
-            return (double)(GetSum(a) / a.Length);
+            return ((double)GetSum(a) / a.Length);
         }
 
         private static int GetSumOfPositives(int[] a)
