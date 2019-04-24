@@ -56,5 +56,10 @@ namespace Homework
                 "\tДолжность: {5}\n", this.Firstname, this.Lastname, this.Birthdate.ToString("dd.MM.yyyy"), this.Id, this.Faculty, this.Post);
             return bs;
         }
+
+        override public float GetSalary()
+        {
+            return this.WorkExperience * 15000;
+        }
     }
 }

@@ -251,7 +251,16 @@ namespace Homework
                         break;
                     case 3:
                         isCorrect = true;
-                        //Рассчитать свою з/п
+                        Console.Clear();
+                        if (CurrentUser.CurrentPermissions == Person.Permissions.student)
+                        {
+                            Console.WriteLine("Простите, у Вас нет зарплаты");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ваша зарплата {0} руб.", CurrentUser.GetSalary());
+                        }
+                        Console.ReadKey();
                         break;
                     case 0:
                         isCorrect = true;
@@ -264,7 +273,7 @@ namespace Homework
                             {
                                 case 4:
                                     isCorrect = true;
-                                    //Добавить оценки студенту
+                                    AddGrade(ref laboratory);
                                     break;
                             }
                         }
@@ -278,7 +287,7 @@ namespace Homework
                                     break;
                                 case 5:
                                     isCorrect = true;
-                                    //Удалить учителя
+                                    DeleteTeacher(ref laboratory);
                                     break;
                                 case 6:
                                     isCorrect = true;
@@ -286,7 +295,7 @@ namespace Homework
                                     break;
                                 case 7:
                                     isCorrect = true;
-                                    //Удалить студента
+                                    DeleteStudent(ref laboratory);
                                     break;
                                 default:
                                     if (CurrentUser.CurrentPermissions == Person.Permissions.admin)
@@ -299,7 +308,7 @@ namespace Homework
                                                 break;
                                             case 9:
                                                 isCorrect = true;
-                                                //Удалить менеджера
+                                                DeleteManager(ref laboratory);
                                                 break;
                                             default:
                                                 break;
@@ -316,6 +325,88 @@ namespace Homework
                         break;
                 }
             }
+        }
+
+        static int ChoiceStudent(ref List<Student> students)
+        {
+            Console.Clear();
+            int index = 1;
+            int choice = 0;
+            foreach (Student student in students)
+            {
+                Console.WriteLine("{0}. {1} {2}", index++, student.Lastname, student.Firstname);
+            }
+            do
+            {
+                Console.Write("Choice ID: ");
+                choice = Int32.Parse(Console.ReadLine());
+            } while (!(choice > 0 && choice < index));
+            return choice;
+        }
+
+        static void DeleteStudent(ref Laboratory laboratory)
+        {
+            List<Student> students = laboratory.GetStudents();
+            int deleteIndex = ChoiceStudent(ref students);
+            students.RemoveAt(--deleteIndex);
+        }
+
+        static int ChoiceTeacher(ref List<Teacher> teachers)
+        {
+            Console.Clear();
+            int index = 1;
+            int choice = 0;
+            foreach (Teacher teacher in teachers)
+            {
+                Console.WriteLine("{0}. {1} {2}", index++, teacher.Lastname, teacher.Firstname);
+            }
+            do
+            {
+                Console.Write("Choice ID: ");
+                choice = Int32.Parse(Console.ReadLine());
+            } while (!(choice > 0 && choice < index));
+            return choice;
+        }
+
+        static void DeleteTeacher(ref Laboratory laboratory)
+        {
+            List<Teacher> teachers = laboratory.GetTeachers();
+            int deleteIndex = ChoiceTeacher(ref teachers);
+            teachers.RemoveAt(--deleteIndex);
+        }
+
+        static int ChoiceManager(ref List<Manager> managers)
+        {
+            Console.Clear();
+            int index = 1;
+            int choice = 0;
+            foreach (Manager manager in managers)
+            {
+                Console.WriteLine("{0}. {1} {2}", index++, manager.Lastname, manager.Firstname);
+            }
+            do
+            {
+                Console.Write("Choice ID: ");
+                choice = Int32.Parse(Console.ReadLine());
+            } while (!(choice > 0 && choice < index));
+            return choice;
+        }
+
+        static void DeleteManager(ref Laboratory laboratory)
+        {
+            List<Manager> managers = laboratory.GetManagers();
+            int deleteIndex = ChoiceManager(ref managers);
+            managers.RemoveAt(--deleteIndex);
+        }
+
+        static void AddGrade(ref Laboratory laboratory)
+        {
+            List<Student> students = laboratory.GetStudents();
+            int choiceIndex = ChoiceStudent(ref students);
+            Student student = students.ElementAt(--choiceIndex);
+            Console.Clear();
+            Console.Write("Введите новую оценку для ID:{0}: ", student.Id);
+            student.AddGrade(Int32.Parse(Console.ReadLine()));
         }
     }
 }

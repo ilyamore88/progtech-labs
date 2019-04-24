@@ -24,5 +24,10 @@ namespace Homework
                 "\tМесто работы: {4}\n", this.Firstname, this.Lastname, this.Birthdate.ToString("dd.MM.yyyy"), this.Id, this.Laboratory);
             return bs;
         }
+
+        override public float GetSalary()
+        {
+            return 150000;
+        }
     }
 }

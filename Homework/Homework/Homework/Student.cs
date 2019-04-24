@@ -66,5 +66,10 @@ namespace Homework
                 "\tОценки: {6}\n", this.Firstname, this.Lastname, this.Birthdate.ToString("dd.MM.yyyy"), this.Id, this.Faculty, this.Group, (gradesS == "" ? "отсутствуют" : gradesS));
             return bs;
         }
+
+        public override float GetSalary()
+        {
+            return 0;
+        }
     }
 }

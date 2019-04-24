@@ -16,5 +16,10 @@ namespace Homework
             Faculty = faculty;
             Post = post;
         }
+
+        override public float GetSalary()
+        {
+            return 45000;
+        }
     }
 }

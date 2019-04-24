@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework
 {
-    abstract class Person
+    abstract class Person : ISalary
     {
         public enum Permissions { admin, student, teacher, manager }
 
@@ -48,5 +48,7 @@ namespace Homework
         {
             this.Password = newPassword;
         }
+
+        public abstract float GetSalary();
     }
 }
